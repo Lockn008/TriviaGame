@@ -52,6 +52,18 @@ height - padding of 20 px = 510 for the "height"*/
 	text-align: center;
 }
 
+.score-board {
+	font-size: 20px;
+	margin: 20px;
+	padding-left: 50px;
+}
+
+.score-box {
+	font-size: 16px;
+	margin-left: 30px;
+	padding-left: 50px;
+}
+
 .start-button:hover, .option:hover {
 	background-color: blue;
 	color: white;

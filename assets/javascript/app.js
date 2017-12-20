@@ -74,9 +74,6 @@ var selectQuestion = function () {
 	}
 }
 
-// initializeGame();
-// selectQuestion();
-
 var startDisplay = function () {
 	var display = $('.game-body');
 	var startButton = $("<div>");
@@ -94,26 +91,39 @@ var questionDisplay = function (indexNum) {
 	questionText.text(questionBank[indexNum].question);
 	var option1 = $("<div>");
 	option1.addClass("option");
-	option1.attr("value", 1);
+	option1.attr("value", "choice1");
 	option1.text(questionBank[indexNum].options.choice1);
 	var option2 = $("<div>");
 	option2.addClass("option");
-	option2.attr("value", 2);
+	option2.attr("value", "choice2");
 	option2.text(questionBank[indexNum].options.choice2);
 	var option3 = $("<div>");
 	option3.addClass("option");
-	option3.attr("value", 3);
+	option3.attr("value", "choice3");
 	option3.text(questionBank[indexNum].options.choice3);
 	var option4 = $("<div>");
 	option4.addClass("option");
-	option4.attr("value", 4);
+	option4.attr("value", "choice4");
 	option4.text(questionBank[indexNum].options.choice4);
 	display.append(questionText);
 	display.append(option1);
 	display.append(option2);
 	display.append(option3);
 	display.append(option4);
+
+	$('.option').on("click", ".option", value, 
+		if (value == questionBank[indexNum].correctAns) {
+			break timer:question;
+			correct++;
+		} else {
+			break timer:question;
+			incorrect++;
+		}
+	)
+
+	timer.question(30);
 }
+
 
 var answerDisplay = function (indexNum) {
 	var display = $('.game-body');
@@ -129,6 +139,8 @@ var answerDisplay = function (indexNum) {
 	display.append(answerText);
 	display.append(reasonText);
 	display.append(answerImg);
+
+	timer.answer(5);
 }
 
 var endDisplay = function () {
@@ -158,21 +170,35 @@ var endDisplay = function () {
 	display.append(restart);
 }
 
-// var timer = {
-// 	question: function (seconds) {
-// 		setInterval(function() {break}, seconds);
-// 	},
-// 	answer: function (seconds) {
-// 		setInterval(function() {break}, seconds);
-// 	},
-// 	endScreen: function (seconds) {
-// 		setInterval(function() {break}, seconds);
+var timer = {
+	question: function (seconds) {
+		for (var i = seconds; seconds > 0; seconds--) {
+			(function() {break questionDisplay;}, 1000);
+		}
+	},
+	answer: function (seconds) {
+		for (var i = seconds; seconds > 0; seconds--) {
+			(function() {break questionDisplay;}, 1000);
+		}
+	}
+}
+
+// var timer = function(seconds) {
+// 	for (var i = seconds; seconds > 0; seconds--) {
+// 		(function() {break questionDisplay;}, 1000);
 // 	}
 // }
 
-endDisplay();
-
-console.log(questionsAsked);
-
 var runGame = function () {
+	initializeGame();
+	while(questionsAsked.length < 5) {
+		selectQuestion();
+		questionDisplay(questionIndex);
+		answerDisplay(questionIndex);
+	}
+	endDisplay();
 }
+
+startDisplay();
+$('.start-button').on("click", runGame());
+
