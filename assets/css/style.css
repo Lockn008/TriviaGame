@@ -6,9 +6,8 @@ body {
 .container {
 	width: 700px;
 	height: 700px;
-	background-color: white;
+	background-color: rgba(255,255,255,0.6);
 	margin: 20px auto;
-	opacity: 0.75;
 	font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -22,7 +21,7 @@ body {
 	padding: 20px;
 	font-size: 20px;
 	text-align: center;
-	background-color: red;
+	background-color: rgba(255,0,0,0.6);
 }
 
 /*amount of space for game-body to fill up = 700-90-60 = 550 height;
@@ -36,14 +35,48 @@ height - padding of 20 px = 510 for the "height"*/
 .start-button {
 	font-size: 20px;
 	padding: 20px;
-	margin: 195px auto;
+	margin: 30px auto;
 	text-align: center;
 }
 
-.start-button:hover {
-	background-color: blue;
+.question-text {
+	font-size: 20px;
+	padding: 20px;
+	height: 80px;
 }
 
-.start-button:active {
+.option {
+	font-size: 20px;
+	padding: 20px;
+	margin-top: 10px;
+	text-align: center;
+}
+
+.start-button:hover, .option:hover {
+	background-color: blue;
+	color: white;
+}
+
+.start-button:active, .option:active {
 	background-color: green;
+}
+
+.answer-text {
+	font-size: 30px;
+}
+
+.answer-reason {
+	font-size: 20px;
+	text-align: center;
+	margin: 20px;
+	height: 80px;
+
+}
+
+.answer-image {
+	margin: 20px;
+	width: 560px;
+	height: auto;
+	max-width: 560px;
+	max-height: 350px;
 }

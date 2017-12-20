@@ -3,44 +3,53 @@ var questionBank = [0,
 	{
 		question: "What country has the largest Muslim population in the world?",
 		options: {
-			1: "China",
-			2: "Indonesia",
-			3: "Saudi Arabia",
-			4: "Egypt"},
-		correctAns: 2
+			choice1: "China",
+			choice2: "Indonesia",
+			choice3: "Saudi Arabia",
+			choice4: "Egypt"},
+		correctAns: "choice2",
+		reason: "With over 225 million muslims the population of muslims in Indonesia surpasses the total population of Eqypt (95 mil) or Saudi Arabia (32 mil).",
+		ansImg: "assets/images/IndonesiaReligion.jpg"
 	},
 	{
 		question: "What body of water does the Colorado River flow directly into?",
 		options: {
-			1: "Gulf of California",
-			2: "Pacific Ocean",
-			3: "Gulf of Mexico",
-			4: "Gulf of Colorado"},
-		correctAns: 1
+			choice1: "Gulf of California",
+			choice2: "Pacific Ocean",
+			choice3: "Gulf of Mexico",
+			choice4: "Gulf of Colorado"},
+		correctAns: "choice1",
+		reason: "The Colorado River flows southwest from Colorado, through Utah, Arizona, and Mexico, into the Gulf of California.",
+		ansImg: "assets/images/ColoradoRiver.jpg"
 	},
 	{
 		question: "Which of the following was NOT part of the former country of Yugoslavia?",
 		options: {
-			1: "Serbia",
-			2: "Croatia",
-			3: "Slovenia",
-			4: "Albania"},
-		correctAns: 4
+			choice1: "Serbia",
+			choice2: "Croatia",
+			choice3: "Slovenia",
+			choice4: "Albania"},
+		correctAns: "choice4",
+		reason: "Yugoslavia broke apart into Serbia, Croatia, Slovenia, Macedonia, Bosnia and Herzegovina, and Montenegro between 1991 and 2006.  Albania was never a part (although was also a socialist dictatorship).",
+		ansImg: "assets/images/Yugoslavia.png"
 	}, 
 	{
 		question: "Which of the following cities is furthest north?",
 		options: {
-			1: "Edmonton, Canada",
-			2: "Moscow, Russia",
-			3: "Edinburgh, UK",
-			4: "Copenhagen, Denmark"},
-		correctAns: 3
+			choice1: "Edmonton, Canada",
+			choice2: "Moscow, Russia",
+			choice3: "Edinburgh, UK",
+			choice4: "Copenhagen, Denmark"},
+		correctAns: "choice3",
+		reason: "Edinburgh is the farthest north, at 55.95 N.  Moscow, at 55.75 N, and Copenhagen, at 55.68 N are close, but Edmonton is further south, at only 53.54 N.",
+		ansImg: "assets/images/EdinburghLatitude"
 	}];
 
 var questionsAsked;
 var correct;
 var incorrect;
 var questionIndex;
+var timeRemaining;
 
 var initializeGame = function () {
 	correct = 0;
@@ -76,7 +85,9 @@ var startDisplay = function () {
 	display.append(startButton);
 }
 
-var questionDisplay = function (indexNum) {  //error, will not display, IDK why
+console.log(questionBank[1].options.choice1);
+//console.log(questionBank[1].options.(questionBank[1].correctAns));//this ain't working for some reason
+var questionDisplay = function (indexNum) {
 	var display = $('.game-body');
 	var questionText = $("<div>");
 	questionText.addClass("question-text");
@@ -84,19 +95,19 @@ var questionDisplay = function (indexNum) {  //error, will not display, IDK why
 	var option1 = $("<div>");
 	option1.addClass("option");
 	option1.attr("value", 1);
-	option1.text(questionBank[indexNum].options.1);
+	option1.text(questionBank[indexNum].options.choice1);
 	var option2 = $("<div>");
 	option2.addClass("option");
 	option2.attr("value", 2);
-	option2.text(questionBank[indexNum].options.2);
+	option2.text(questionBank[indexNum].options.choice2);
 	var option3 = $("<div>");
 	option3.addClass("option");
 	option3.attr("value", 3);
-	option3.text(questionBank[indexNum].options.3);
+	option3.text(questionBank[indexNum].options.choice3);
 	var option4 = $("<div>");
 	option4.addClass("option");
 	option4.attr("value", 4);
-	option4.text(questionBank[indexNum].options.4);
+	option4.text(questionBank[indexNum].options.choice4);
 	display.append(questionText);
 	display.append(option1);
 	display.append(option2);
@@ -104,7 +115,62 @@ var questionDisplay = function (indexNum) {  //error, will not display, IDK why
 	display.append(option4);
 }
 
-questionDisplay(1);
+var answerDisplay = function (indexNum) {
+	var display = $('.game-body');
+	var answerText = $("<div>");
+	answerText.addClass("answer-text");
+	answerText.text("Correct Answer: "/*+questionBank[indexNum].options.(questionBank[indexNum].correctAns)*/);  //therefore this aint working for some reason
+	var reasonText = $("<div>");
+	reasonText.addClass("reason-text");
+	reasonText.text(questionBank[indexNum].reason);
+	var answerImg = $("<img>");
+	answerImg.addClass("answer-image");
+	answerImg.attr("src", questionBank[indexNum].ansImg);
+	display.append(answerText);
+	display.append(reasonText);
+	display.append(answerImg);
+}
+
+var endDisplay = function () {
+	var display = $('.game-body');
+	var score = $("<div>");
+	score.addClass("score-board");
+	var showScore = $("<div>");
+	showScore.addClass("show-score");
+	showScore.text("Here is how you did:");
+	var showCorrect = $("<div>");
+	showCorrect.addClass("score-box");
+	showCorrect.text("Correct: ");
+	var showIncorrect = $("<div>");
+	showIncorrect.addClass("score-box");
+	showIncorrect.text("Incorrect: ");
+	var showUnanswered = $("<div>");
+	showUnanswered.addClass("score-box");
+	showUnanswered.text("Unanswered: ");
+	var restart = $("<div>");
+	restart.addClass("start-button");
+	restart.text("Start Over?");
+	score.append(showScore);
+	score.append(showCorrect);
+	score.append(showIncorrect);
+	score.append(showUnanswered);
+	display.append(score);
+	display.append(restart);
+}
+
+// var timer = {
+// 	question: function (seconds) {
+// 		setInterval(function() {break}, seconds);
+// 	},
+// 	answer: function (seconds) {
+// 		setInterval(function() {break}, seconds);
+// 	},
+// 	endScreen: function (seconds) {
+// 		setInterval(function() {break}, seconds);
+// 	}
+// }
+
+endDisplay();
 
 console.log(questionsAsked);
 
