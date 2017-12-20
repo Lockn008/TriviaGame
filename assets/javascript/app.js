@@ -68,7 +68,43 @@ var selectQuestion = function () {
 // initializeGame();
 // selectQuestion();
 
+var startDisplay = function () {
+	var display = $('.game-body');
+	var startButton = $("<div>");
+	startButton.addClass("start-button");
+	startButton.text("Start");
+	display.append(startButton);
+}
 
+var questionDisplay = function (indexNum) {  //error, will not display, IDK why
+	var display = $('.game-body');
+	var questionText = $("<div>");
+	questionText.addClass("question-text");
+	questionText.text(questionBank[indexNum].question);
+	var option1 = $("<div>");
+	option1.addClass("option");
+	option1.attr("value", 1);
+	option1.text(questionBank[indexNum].options.1);
+	var option2 = $("<div>");
+	option2.addClass("option");
+	option2.attr("value", 2);
+	option2.text(questionBank[indexNum].options.2);
+	var option3 = $("<div>");
+	option3.addClass("option");
+	option3.attr("value", 3);
+	option3.text(questionBank[indexNum].options.3);
+	var option4 = $("<div>");
+	option4.addClass("option");
+	option4.attr("value", 4);
+	option4.text(questionBank[indexNum].options.4);
+	display.append(questionText);
+	display.append(option1);
+	display.append(option2);
+	display.append(option3);
+	display.append(option4);
+}
+
+questionDisplay(1);
 
 console.log(questionsAsked);
 

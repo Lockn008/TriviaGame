@@ -8,4 +8,42 @@ body {
 	height: 700px;
 	background-color: white;
 	margin: 20px auto;
+	opacity: 0.75;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-title {
+	padding: 20px;
+	font-size: 50px;
+	text-align: center;
+}
+
+.timer {
+	padding: 20px;
+	font-size: 20px;
+	text-align: center;
+	background-color: red;
+}
+
+/*amount of space for game-body to fill up = 700-90-60 = 550 height;
+height - padding of 20 px = 510 for the "height"*/
+
+.game-body {
+	height: 450px;
+	padding: 50px;
+}
+
+.start-button {
+	font-size: 20px;
+	padding: 20px;
+	margin: 195px auto;
+	text-align: center;
+}
+
+.start-button:hover {
+	background-color: blue;
+}
+
+.start-button:active {
+	background-color: green;
 }
